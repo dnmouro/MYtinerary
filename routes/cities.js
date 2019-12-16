@@ -1,10 +1,18 @@
 const express = require('express')
+const mongoose = require("mongoose")
+
 
 const router = express.Router()
 
-router.get('/test', (req, res) => {
-    res.send({ msg: 'Cities test route.' })
-    })
+const cityModel = require("../model/cityModel")
+
+router.get("/all", (req, res) => {
+    cityModel.find({})
+        .then(files => {
+            res.send(files)
+        })
+        .catch(err => console.log(err));
+});
 
 
 

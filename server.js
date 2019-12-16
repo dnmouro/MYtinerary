@@ -18,15 +18,11 @@ app.listen(port, () => {
 });
 app.use('/cities', require('./routes/cities'))
 
-const connectDB = async(rec, res) => {
-    try {
-        await mongoose.connect('mongodb+srv://dnmouro:Leonor01@mytinerarydnmouro-hozxr.mongodb.net/test?retryWrites=true&w=majority', { useUnifiedTopology: true, useNewUrlParser: true });
-        console.log("dbconnected");
+const db = require('./keys').mongoURI;
 
-    } catch (err) {
-        console.log(err.message);
-               
-    }
-}
-connectDB();
+mongoose.connect(db, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+    .then(() => console.log('Connection to Mongo DB established'))
+    .catch(err => console.log(err));
+
+
 
